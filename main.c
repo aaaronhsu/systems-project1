@@ -11,19 +11,18 @@
 int main(int argc, char *argv[]) {
   // argc - 1 is the amount of args in command line
   char ** args = calloc(argc - 1, sizeof(char *));
-  
   if (argc >= 2) {
     // you have the args now loop through and add them
+    int i;
+    for (int i = 1; i < argc; i++) {
+      args[i - 1] = argv[i];
+    }
   } else {
     char input[100];
     printf("Enter a command for the shell: ");
     fgets(input, 100, stdin);
-    sscanf(input, "%s", input);
-    // copy parse args function
+    printf("input: %s\n", input);
   }
-
-
-  printf("Here is the input: %s\n", input);
 
   return 0;
 }
