@@ -7,10 +7,6 @@ char ** parse_args(char *line) {
   for (i = 1; i < ARG_NUM; i++) {
     if (strsep(&line, " ") != NULL) args[i] = line;
   }
-
-
-  // TODO: edge case- if you put a space as the last arg it takes up a slot
-  
   return args;
 }
 
@@ -26,6 +22,15 @@ char * read_args() {
 int execute_args(char **args) {
   if (!strcmp(args[0], "exit")) {
     return 0;
+  }
+  int pid = fork();
+  if (!pid) {
+    int success = execvp(args[0], args);
+    if (success == -1) return -1;
+  }
+  else {
+    int status;
+    int pid_stat = wait(&status);
   }
   return 1;
 }
