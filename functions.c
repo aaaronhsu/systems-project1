@@ -20,9 +20,13 @@ char * read_args() {
 }
 
 int execute_args(char **args) {
+  // exit
   if (!strcmp(args[0], "exit")) {
     return 0;
   }
+  // cd (LATER)
+
+  // other
   int pid = fork();
   if (!pid) {
     int success = execvp(args[0], args);
