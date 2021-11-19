@@ -3,32 +3,19 @@
 int main(int argc, char *argv[]) {
   int exit = 1;
   printf("Hello! Welcome to our shell. Type \"exit\" to leave.\n");
-  // for command line input if it exists
-  char ** args = calloc(ARG_NUM, sizeof(char *));
-  if (argc >= 2) {
-      // you have the args now loop through and add them
-      int i;
-      for (int i = 1; i < ARG_NUM; i++) {
-        args[i - 1] = argv[i];
-      }
-  }
+
   // so that it goes on forever until exited
   while(exit) {
     args = calloc(ARG_NUM, sizeof(char *));
-    char input[100];
-    printf("Enter a command for the shell: ");
-    fgets(input, 100, stdin);
-    input[strcspn(input, "\n")] = 0; // gets rid of the newline
-    args = parse_args(input);
+    args = parse_args(read_args());
 
     // TESTING the two methods of assigning args
     for (int i = 0; i < ARG_NUM; i++) {
       printf("%s\n", args[i]);
     }
-    // exit function 
-    if (!strcmp(args[0], "exit")) {
-      exit = 0;
-    }
+
+    exit = execute_args(args);
+
   }
   return 0;
 }

@@ -15,5 +15,8 @@
 #define ARG_NUM 5
 
 char ** parse_args(char *line);
+char * read_args();
+
+int execute_args(char **args);
 
 #endif
