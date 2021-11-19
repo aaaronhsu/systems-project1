@@ -4,9 +4,9 @@ int main(int argc, char *argv[]) {
   int exit = 1;
   printf("Hello! Welcome to our shell. Type \"exit\" to leave.\n");
 
+  char ** args = calloc(ARG_NUM, sizeof(char *));
   // so that it goes on forever until exited
   while(exit) {
-    args = calloc(ARG_NUM, sizeof(char *));
     args = parse_args(read_args());
 
     // TESTING the two methods of assigning args
