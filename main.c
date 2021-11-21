@@ -12,22 +12,35 @@ int main(int argc, char *argv[]) {
     for (i = 0; i < ARG_NUM; i++) {
       printf("%s\n", args[i]);
     }
-
+    
+    /*
     char ** args1;
+    int start = 0;
     for (i = 0; i < ARG_NUM; i++) {
-      if (!strcmp(args[i], ";")) {
-        args1 = calloc(i, sizeof(char *));
-        for (j = 0; j < i; j++) {
-          args1[j] = args[j];
+      printf("round %s", args[i]);
+      char *comp = args[i];
+      if (!strcmp(comp, ";")) {
+        printf("found semicolon");
+        args1 = calloc(i - start, sizeof(char *));
+        for (j = start; j < i; j++) {
+          args1[j - start] = args[j];
         }
-        exit = execute_args(args1);
-        if (exit == -1) {
-          break;
-        }
+        printf("executing from %d to %d", start, i); // i is where semicolon is
+        execute_args(args1);
+        start = i + 1; // sets the start to the new beginning after semi
+  
       }
     }
-    exit = execute_args(args1);
+  
+    // if there was no semi colon after the rest
+    args1 = calloc(i, sizeof(char *));
+    for (i = start; i < ARG_NUM; i++) {
+      args1[i - start] = args[i];
+    }
+    */
 
+    // current problem- if it says exit before last command, it doesn't work
+    exit = execute_args(args);
     if (exit == -1) {
       printf("please give a good terminal command\n");
     }
