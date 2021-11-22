@@ -13,31 +13,35 @@ int main(int argc, char *argv[]) {
       printf("%s\n", args[i]);
     }
     
-    /*
+  
     char ** args1;
     int start = 0;
+    printf("%d\n", ARG_NUM);
     for (i = 0; i < ARG_NUM; i++) {
-      printf("round %s", args[i]);
+      printf("round %s\n", args[i]);
       char *comp = args[i];
+      printf("%s\n", comp);
       if (!strcmp(comp, ";")) {
-        printf("found semicolon");
+        printf("found semicolon\n");
         args1 = calloc(i - start, sizeof(char *));
         for (j = start; j < i; j++) {
           args1[j - start] = args[j];
         }
-        printf("executing from %d to %d", start, i); // i is where semicolon is
+        printf("executing from %d to %d\n", start, i); // i is where semicolon is
         execute_args(args1);
         start = i + 1; // sets the start to the new beginning after semi
   
       }
     }
-  
+
+    /*
     // if there was no semi colon after the rest
     args1 = calloc(i, sizeof(char *));
     for (i = start; i < ARG_NUM; i++) {
       args1[i - start] = args[i];
     }
     */
+  
 
     // current problem- if it says exit before last command, it doesn't work
     exit = execute_args(args);
