@@ -8,11 +8,11 @@ int parse_args(char *line) {
   for (i = 0; i < ARG_NUM; i++) {
     if (line[i] == ';') {
       line[i] = '\0';
+      printf("replaced %s\n", line[i]);
     }
   }
 
   int exit = 1;
-  printf("KAIWDGIUAWGDIWGIDU %s\n", line);
   char ** to_exec = parse_command(line);
   execute_args(to_exec);
 
@@ -64,6 +64,7 @@ char * read_args() {
 }
 
 int execute_args(char **args) {
+  printf("made it to execute args. args[0] = %s\n", args[0]);
   // exit
   if (!strcmp(args[0], "exit")) {
     return 0;
@@ -73,6 +74,7 @@ int execute_args(char **args) {
   // other
   int pid = fork();
   if (!pid) {
+    printf("before exec\n");
     int success = execvp(args[0], args);
     if (success == -1) return -1;
   }
@@ -80,5 +82,6 @@ int execute_args(char **args) {
     int status;
     int pid_stat = wait(&status);
   }
+  printf("finished exec\n");
   return 1;
 }
