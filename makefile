@@ -9,3 +9,8 @@ functions.o: functions.c functions.h
 
 run:
 	./p1
+
+lol:
+	git add .
+	git commit -m "running on school computer"
+	git push
