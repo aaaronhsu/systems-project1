@@ -14,7 +14,9 @@
 // for now the max args it takes is 5 if you input during the prompt
 #define ARG_NUM 5
 
-char ** parse_args(char *line);
+int parse_args(char *line);
+char ** parse_command(char *line);
+int count_semi(char *line);
 char * read_args();
 
 int execute_args(char **args);

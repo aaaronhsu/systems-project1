@@ -1,14 +1,58 @@
 #include "functions.h"
 
-char ** parse_args(char *line) {
+int parse_args(char *line) {
+  printf("parse_args\n");
+  int semi = count_semi(line);
+
+  int i;
+  for (i = 0; i < ARG_NUM; i++) {
+    if (line[i] == ';') {
+      line[i] = '\0';
+    }
+  }
+
+  int exit = 1;
+  printf("KAIWDGIUAWGDIWGIDU %s\n", line);
+  char ** to_exec = parse_command(line);
+  execute_args(to_exec);
+
+
+  for (i = 0; i < ARG_NUM; i++) {
+    if ((line[i] == '\0') && semi > 0) {
+      exit = execute_args(parse_command(&line[i + 1]));
+
+      if (exit != 1) return exit;
+      semi--;
+    }
+  }
+
+  return exit;
+  
+}
+
+char ** parse_command(char *line) {
+  printf("parse command: %s\n", line);
+  int i;
   char **args = calloc(ARG_NUM, sizeof(char *)); 
   args[0] = line; 
-  int i;
+  printf("args 0: %s\n", args[0]);
   for (i = 1; i < ARG_NUM; i++) {
     if (strsep(&line, " ") != NULL) args[i] = line;
   }
   return args;
 }
+
+int count_semi(char *line) {
+  int i = 0;
+  int count = 0;
+  while (line[count] != '\0') {
+    if (line[count] == ';') i++;
+    count++;
+  }
+  return i;
+}
+
+
 
 char * read_args() {
   char * input = malloc(100);
