@@ -16,6 +16,7 @@ int parse_args(char *line) {
   char ** to_exec = parse_command(line);
   execute_args(to_exec);
 
+  // THIS LOOP ONLY WORKS ONCE FOR SOME REASON
   for (i = 0; i < ARG_NUM; i++) {
     if ((line[i] == '\0') && semi > 0) {
       exit = execute_args(parse_command(&line[i + 1]));
