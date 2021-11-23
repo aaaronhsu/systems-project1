@@ -16,7 +16,6 @@ int parse_args(char *line) {
   char ** to_exec = parse_command(line);
   execute_args(to_exec);
 
-
   for (i = 0; i < ARG_NUM; i++) {
     if ((line[i] == '\0') && semi > 0) {
       exit = execute_args(parse_command(&line[i + 1]));
@@ -46,9 +45,10 @@ int count_semi(char *line) {
   int i = 0;
   int count = 0;
   while (line[count] != '\0') {
-    if (line[count] == ';') i++;
+    if (line[count] == ';' && (line[count + 1] != NULL)) i++;
     count++;
   }
+  printf("semi count: %d\n", i);
   return i;
 }
 
