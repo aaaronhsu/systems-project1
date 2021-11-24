@@ -12,9 +12,9 @@
 #include <sys/wait.h>
 
 // for now the max args it takes is 5 if you input during the prompt
-#define ARG_NUM 5
+#define ARG_NUM 10
 
-int parse_args(char *line);
+char ** parse_args(char *line);
 char ** parse_command(char *line);
 int count_semi(char *line);
 char * read_args();
