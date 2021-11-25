@@ -23,6 +23,10 @@ int main(int argc, char *argv[]) {
           args1[j - start] = args[j];
         }
         exit = execute_args(args1);
+        // just like in terminal, say command not found for just that one
+        if (exit == -1){
+          print_command_not_found(args1);
+        }
         start = i + 1;
       }
     }
@@ -30,13 +34,13 @@ int main(int argc, char *argv[]) {
       args1 = calloc(ARG_NUM, sizeof(char *)); // calloc too much space bc idk how to find actual amount
       for (i = start; i < ARG_NUM; i++) {
         args1[i - start] = args[i];
+
       }
       exit = execute_args(args1);
-    }
-
-    // current problem- if it says exit before last command, it doesn't work
-    if (exit == -1) {
-      printf("please give a good terminal command\n");
+      // current problem- if it says exit before last command, it doesn't work
+      if (exit == -1) {
+        print_command_not_found(args1);
+      }
     }
 
   }

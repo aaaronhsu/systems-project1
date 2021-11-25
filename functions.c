@@ -6,6 +6,7 @@ char ** parse_args(char *line) {
   args[0] = line; 
   int i;
   for (i = 1; i < ARG_NUM; i++) {
+    // SEE ISSUE ABOVE- add some if statement here that checks for semis
     if (strsep(&line, " ") != NULL) args[i] = line;
   }
   return args;
@@ -19,12 +20,24 @@ char * read_args() {
   return input;
 }
 
+void print_command_not_found(char ** args) {
+  printf("command not found: ");
+  int i = 0;
+  while (args[i] != NULL) {
+    printf("%s ", args[i]);
+    i++;
+  }
+  printf("\n");
+}
+
 int execute_args(char **args) {
   // exit
   if (!strcmp(args[0], "exit")) {
+    exit(0); // does this just exit wherever?
     return 0;
   }
-  // cd (LATER)
+  // cd
+
 
   // other
   int pid = fork();
