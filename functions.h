@@ -18,6 +18,7 @@
 char ** parse_args(char *line);
 char * read_args();
 void print_command_not_found(char ** args);
+int semi_exec(char ** args);
 int execute_args(char **args);
 
 #endif
