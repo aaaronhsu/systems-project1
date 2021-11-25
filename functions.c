@@ -69,23 +69,38 @@ int semi_exec(char ** args) {
 }
 
 int execute_args(char **args) {
+  // count the number of args for later
+  int arg_count = 0;
+  while (args[arg_count] != NULL) {
+    arg_count++;
+  }
+
   // exit
   if (!strcmp(args[0], "exit")) {
     exit(0); // does this just exit wherever?
     return 0;
   }
   // cd
-
-
+  else if (!strcmp(args[0], "cd")) {
+    if (arg_count != 2) printf("format using cd [path/to/dir]\n");
+    else {
+      int status = chdir(args[1]);
+      if (status == -1) printf("failed to change directories: %s\n", strerror(errno));
+    }
+    // returns 1 even though it didn't work because we don't also need the automated error message
+    return 1;
+  }
   // other
-  int pid = fork();
-  if (!pid) {
-    int success = execvp(args[0], args);
-    if (success == -1) return -1;
-  }
   else {
-    int status;
-    int pid_stat = wait(&status);
+    int pid = fork();
+    if (!pid) {
+      int success = execvp(args[0], args);
+      if (success == -1) return -1;
+    }
+    else {
+      int status;
+      int pid_stat = wait(&status);
+    }
+    return 1;
   }
-  return 1;
 }
