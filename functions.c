@@ -62,10 +62,10 @@ int semi_exec(char ** args) {
         args2[j - start - leading_space] = args1[j - start];
       }
 
-      exit = execute_args(args1);
+      exit = execute_args(args2);
       // just like in terminal, say command not found for just that one
       if (exit == -1){
-        print_command_not_found(args1);
+        print_command_not_found(args2);
       }
       start = i + 1;
     }
