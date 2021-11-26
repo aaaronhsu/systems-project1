@@ -17,8 +17,18 @@ char * read_args() {
   char * input = malloc(100);
   printf("Enter a command for the shell: ");
   fgets(input, 100, stdin);
-  input[strcspn(input, " \n")] = 0; // gets rid of the space + newline
-  input[strcspn(input, "\n")] = 0;
+  input[strcspn(input, "\n")] = 0; // gets rid of the newline
+
+  // remove terminating spaces from input
+  int i;
+  for (i = strlen(input) - 1; i >= 0; i--) {
+    if (input[i] == ' ') {
+      input[i] = '\0';
+    } else {
+      break;
+    }
+  }
+  
   return input;
 }
 
