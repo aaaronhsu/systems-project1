@@ -53,22 +53,10 @@ int semi_exec(char ** args) {
         args1[j - start] = args[j];
       }
 
-      args2 = calloc(i - start, sizeof(char *));
-      int leading_space = 0;
-      for (j = start; j < i; j++) {
-        if (*args1[j - start] == ' ') {
-          leading_space++;
-          continue;
-        }
-        args2[j - start - leading_space] = args1[j - start];
-      }
-
-      printf("args: %s\n", *args2);
-
-      exit = execute_args(args2);
+      exit = execute_args(args1);
       // just like in terminal, say command not found for just that one
       if (exit == -1){
-        print_command_not_found(args2);
+        print_command_not_found(args1);
       }
       start = i + 1;
     }
