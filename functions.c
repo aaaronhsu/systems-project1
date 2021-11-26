@@ -48,6 +48,7 @@ int semi_exec(char ** args) {
     if (*args[i] == ';') {
       args1 = calloc(i - start, sizeof(char *));
       for (j = i - 1; j >= start; j--) {
+        // if there are terminating spaces, ignore them
         if (*args[j] == ' ') continue;
         args1[j - start] = args[j];
       }
@@ -71,14 +72,27 @@ int semi_exec(char ** args) {
     }
   }
   if (!semi_last) { // last one isn't semi
-    args1 = calloc(ARG_NUM, sizeof(char *)); // calloc too much space bc idk how to find actual amount
-    for (i = start; i < ARG_NUM; i++) {
-      args1[i - start] = args[i];
+    args1 = calloc(i - start, sizeof(char *));
+    for (j = i - 1; j >= start; j--) {
+      // if there are terminating spaces, ignore them
+      if (*args[j] == ' ') continue;
+      args1[j - start] = args[j];
     }
-    exit = execute_args(args1);
-    // current problem- if it says exit before last command, it doesn't work
-    if (exit == -1) {
-      print_command_not_found(args1);
+    
+    args2 = calloc(i - start, sizeof(char *));
+    int leading_space = 0;
+    for (j = start; j < i; j++) {
+      if (*args1[j - start] == ' ') {
+        leading_space++;
+        continue;
+      }
+      args2[j - start - leading_space] = args1[j - start];
+    }
+
+    exit = execute_args(args2);
+    // just like in terminal, say command not found for just that one
+    if (exit == -1){
+      print_command_not_found(args2);
     }
   }
     return exit;
