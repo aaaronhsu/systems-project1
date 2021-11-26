@@ -51,9 +51,9 @@ int semi_exec(char ** args) {
 
       // remove terminating spaces from args
       int i;
-      for (i = strlen(input) - 1; i >= 0; i--) {
-        if (input[i] == ' ') {
-          input[i] = '\0';
+      for (i = strlen(args) - 1; i >= 0; i--) {
+        if (args[i] == ' ') {
+          args[i] = '\0';
         } else {
           break;
         }
