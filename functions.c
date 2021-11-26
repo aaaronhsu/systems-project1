@@ -63,7 +63,7 @@ int semi_exec(char ** args) {
         args2[j - start - leading_space] = args1[j - start];
       }
 
-      printf("args1: %s\n", args2);
+      printf("args: %s\n", *args2);
 
       exit = execute_args(args2);
       // just like in terminal, say command not found for just that one
