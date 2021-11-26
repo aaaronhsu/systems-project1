@@ -19,16 +19,7 @@ char * read_args() {
   fgets(input, 100, stdin);
   input[strcspn(input, "\n")] = 0; // gets rid of the newline
 
-  // remove terminating spaces from input
-  int i;
-  for (i = strlen(input) - 1; i >= 0; i--) {
-    if (input[i] == ' ') {
-      input[i] = '\0';
-    } else {
-      break;
-    }
-  }
-  
+
   return input;
 }
 
@@ -57,6 +48,17 @@ int semi_exec(char ** args) {
       for (j = start; j < i; j++) {
         args1[j - start] = args[j];
       }
+
+      // remove terminating spaces from args
+      int i;
+      for (i = strlen(input) - 1; i >= 0; i--) {
+        if (input[i] == ' ') {
+          input[i] = '\0';
+        } else {
+          break;
+        }
+      }
+
       exit = execute_args(args1);
       // just like in terminal, say command not found for just that one
       if (exit == -1){
