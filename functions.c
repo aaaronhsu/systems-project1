@@ -38,8 +38,6 @@ int semi_exec(char ** args) {
   int start = 0;
   int semi_last = 0; // assume last one isn't semi
   char ** args1;
-  char ** args2;
-
   for (i = 0; i < ARG_NUM - 1; i++) {
     if (args[i] == NULL) {
       if (*args[i - 1] == ';') semi_last = 1;
@@ -48,10 +46,10 @@ int semi_exec(char ** args) {
     if (*args[i] == ';') {
       args1 = calloc(i - start, sizeof(char *));
       for (j = i - 1; j >= start; j--) {
-        // if there are terminating spaces, ignore them
         if (*args[j] == ' ') continue;
         args1[j - start] = args[j];
       }
+      
 
       exit = execute_args(args1);
       // just like in terminal, say command not found for just that one
