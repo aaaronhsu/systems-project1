@@ -38,6 +38,8 @@ int semi_exec(char ** args) {
   int start = 0;
   int semi_last = 0; // assume last one isn't semi
   char ** args1;
+  char ** args2;
+
   for (i = 0; i < ARG_NUM - 1; i++) {
     if (args[i] == NULL) {
       if (*args[i - 1] == ';') semi_last = 1;
@@ -48,6 +50,16 @@ int semi_exec(char ** args) {
       for (j = i - 1; j >= start; j--) {
         if (*args[j] == ' ') continue;
         args1[j - start] = args[j];
+      }
+
+      args2 = calloc(i - start, sizeof(char *));
+      int leading_space = 0;
+      for (j = start; j < i; j++) {
+        if (*args1[j - start] == ' ') {
+          leading_space++;
+          continue;
+        }
+        args2[j - start - leading_space] = args1[j - start];
       }
 
       exit = execute_args(args1);
