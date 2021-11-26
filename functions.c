@@ -45,18 +45,9 @@ int semi_exec(char ** args) {
     }
     if (*args[i] == ';') {
       args1 = calloc(i - start, sizeof(char *));
-      for (j = start; j < i; j++) {
+      for (j = i - 1; j >= start; j--) {
+        if (args1[j] == ' ') continue;
         args1[j - start] = args[j];
-      }
-
-      // remove terminating spaces from args
-      int i;
-      for (i = i - start - 1; i >= 0; i--) {
-        if (args1[i] == ' ') {
-          args1[i] = '\0';
-        } else {
-          break;
-        }
       }
 
       exit = execute_args(args1);
