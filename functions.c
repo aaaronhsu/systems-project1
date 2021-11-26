@@ -17,7 +17,8 @@ char * read_args() {
   char * input = malloc(100);
   printf("Enter a command for the shell: ");
   fgets(input, 100, stdin);
-  input[strcspn(input, "\n")] = 0; // gets rid of the newline
+  input[strcspn(input, " \n")] = 0; // gets rid of the space + newline
+  input[strcspn(input, "\n")] = 0;
   return input;
 }
 
