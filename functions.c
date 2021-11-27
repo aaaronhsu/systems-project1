@@ -103,13 +103,14 @@ int execute_args(char **args) {
   else {
 
     int out;
+    int backup_sdout = dup(STDOUT_FILENO);
 
     if (contains_greater != -1) {
       // >
       out = open(args[contains_greater + 1], O_WRONLY | O_CREAT, 0644);
       args[contains_greater] = '\0';
 
-      dup2(out, 1);
+      dup2(out, STDOUT_FILENO);
       close(out);
     }
     else if (contains_even_greater != -1) {
@@ -117,7 +118,7 @@ int execute_args(char **args) {
       out = open(args[contains_even_greater + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
       args[contains_even_greater] = '\0';
 
-      dup2(out, 1);
+      dup2(out, STDOUT_FILENO);
       close(out);
     }
 
@@ -125,6 +126,7 @@ int execute_args(char **args) {
     int pid = fork();
     if (!pid) {
       int success = execvp(args[0], args);
+      dup2(backup_sdout, STDOUT_FILENO);
       if (success == -1) return -1;
     }
     else {
