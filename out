@@ -1,0 +1,14 @@
+.
+..
+.git
+.gitignore
+a.exe
+functions.c
+functions.h
+functions.o
+main.c
+main.o
+makefile
+out
+README.md
+test.c

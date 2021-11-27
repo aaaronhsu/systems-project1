@@ -75,7 +75,12 @@ int semi_exec(char ** args) {
 int execute_args(char **args) {
   // count the number of args for later
   int arg_count = 0;
+  int contains_> = 0;
+  int contains_>> = 0;
+
   while (args[arg_count] != NULL) {
+    if (strcmp(args[arg_count], ">") == 0) contains_> = 1;
+    if (strcmp(args[arg_count], ">>") == 0) contains_>> = 1;
     arg_count++;
   }
 
