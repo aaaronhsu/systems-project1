@@ -131,6 +131,7 @@ int execute_args(char **args) {
       int status;
       int pid_stat = wait(&status);
     }
+    dup2(backup_sdout, STDOUT_FILENO);
     return 1;
   }
 }
