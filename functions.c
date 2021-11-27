@@ -75,12 +75,12 @@ int semi_exec(char ** args) {
 int execute_args(char **args) {
   // count the number of args for later
   int arg_count = 0;
-  int contains_greater = 0; // >
-  int contains_even_greater = 0; // >>
+  int contains_greater = -1; // >
+  int contains_even_greater = -1; // >>
 
   while (args[arg_count] != NULL) {
-    if (strcmp(args[arg_count], ">") == 0) contains_greater = 1;
-    if (strcmp(args[arg_count], ">>") == 0) contains_even_greater = 1;
+    if (strcmp(args[arg_count], ">") == 0) contains_greater = arg_count;
+    if (strcmp(args[arg_count], ">>") == 0) contains_even_greater = arg_count;
     arg_count++;
   }
 
@@ -101,6 +101,27 @@ int execute_args(char **args) {
   }
   // other
   else {
+
+    int out;
+
+    if (contains_greater != -1) {
+      // >
+      out = open(args[contains_greater + 1], O_WRONLY | O_CREAT, 0644);
+      args[contains_greater] = '\0';
+
+      dup2(out, 1);
+      close(out);
+    }
+    else if (contains_even_greater != -1) {
+      // >>
+      out = open(args[contains_even_greater + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+      args[contains_even_greater] = '\0';
+
+      dup2(out, 1);
+      close(out);
+    }
+
+
     int pid = fork();
     if (!pid) {
       int success = execvp(args[0], args);
