@@ -111,7 +111,6 @@ int execute_args(char **args) {
       args[contains_greater] = '\0';
 
       dup2(out, STDOUT_FILENO);
-      close(out);
     }
     else if (contains_even_greater != -1) {
       // >>
@@ -119,7 +118,6 @@ int execute_args(char **args) {
       args[contains_even_greater] = '\0';
 
       dup2(out, STDOUT_FILENO);
-      close(out);
     }
 
 
