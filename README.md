@@ -7,6 +7,9 @@
   - There must be a space before the semicolon
 - Redirection using `>` and `<`
   - You cannot use them together in the same command (yet)
+- Piping using `|`
+  - You can only pipe two commands together
+  - You cannot use them with `>` or `<` (yet)
 
 ---
 
