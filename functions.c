@@ -118,7 +118,7 @@ int execute_args(char **args) {
       args[contains_pipe] = '\0'; 
 
       FILE * pipe_file = popen(args[0], "r");
-      dup2(pipe_file, STDIN_FILENO);
+      dup2(fileno(pipe_file), STDIN_FILENO);
 
       args[0] = args[contains_pipe + 1]; // redirect pointer
 
