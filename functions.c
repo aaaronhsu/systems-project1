@@ -75,12 +75,15 @@ int semi_exec(char ** args) {
 int execute_args(char **args) {
   // count the number of args for later
   int arg_count = 0;
+
+  int contains_pipe = -1;
   int contains_greater = -1; // >
   int contains_less = -1; // <
 
   while (args[arg_count] != NULL) {
 
     // scan for > and <
+    if (strcmp(args[arg_count], "|") == 0) contains_pipe = arg_count;
     if (strcmp(args[arg_count], ">") == 0) contains_greater = arg_count;
     if (strcmp(args[arg_count], "<") == 0) contains_less = arg_count;
     
@@ -110,7 +113,17 @@ int execute_args(char **args) {
     int backup_sdout = dup(STDOUT_FILENO);
     int backup_sdin = dup(STDIN_FILENO);
 
-    if (contains_greater != -1) {
+    // if there's a pipe, we need to do some piping
+    if (contains_pipe != -1) {
+      args[contains_pipe] = '\0'; 
+
+      FILE * pipe_file = popen(args[0], "r");
+      dup2(pipe_file, STDIN_FILENO);
+
+      args[0] = args[contains_pipe + 1]; // redirect pointer
+
+    }
+    else if (contains_greater != -1) {
       // >
 
       // creates file to write to
