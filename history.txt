@@ -1,1 +1,15 @@
-ls || ls
+potato
+cat potato
+ls
+
+git pull
+ls
+rm out
+rm potato
+
+cat p1
+
+git 
+git add .
+git commit 
+make lol

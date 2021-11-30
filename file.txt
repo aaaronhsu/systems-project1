@@ -1,0 +1,17 @@
+total 84
+drwxr-xr-x 3 ahsu20 student  4096 Nov 29  2021 .
+drwxr-xr-x 4 ahsu20 student  4096 Nov 22 21:00 ..
+-rw-r--r-- 1 ahsu20 student     0 Nov 29  2021 file.txt
+-rw-r--r-- 1 ahsu20 student  5035 Nov 29 21:41 functions.c
+-rw-r--r-- 1 ahsu20 student   551 Nov 29 21:38 functions.h
+-rw-r--r-- 1 ahsu20 student  6544 Nov 29 21:41 functions.o
+drwxr-xr-x 8 ahsu20 student  4096 Nov 29 21:41 .git
+-rw-r--r-- 1 ahsu20 student   442 Nov 22 21:00 .gitignore
+-rw-r--r-- 1 ahsu20 student    20 Nov 29  2021 history.txt
+-rw-r--r-- 1 ahsu20 student   618 Nov 29 21:38 main.c
+-rw-r--r-- 1 ahsu20 student  2120 Nov 29 21:39 main.o
+-rw-r--r-- 1 ahsu20 student   237 Nov 22 21:00 makefile
+-rw-r--r-- 1 ahsu20 student   107 Nov 26 23:17 out
+-rwxr-xr-x 1 ahsu20 student 18048 Nov 29 21:41 p1
+-rw-r--r-- 1 ahsu20 student    83 Nov 26 23:35 potato
+-rw-r--r-- 1 ahsu20 student  1337 Nov 29 21:41 README.md
