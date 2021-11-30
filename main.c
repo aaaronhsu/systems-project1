@@ -12,7 +12,6 @@ int main(int argc, char *argv[]) {
     // doesn't actually matter what exit is because exit(0) quits everything and the -1 doesn't affect loop
     exit = semi_exec(args);
     session++;
-
   }
   return 0;
 }

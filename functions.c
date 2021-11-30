@@ -32,7 +32,6 @@ char * read_args() {
   fgets(input, 100, stdin);
   input[strcspn(input, "\n")] = 0; // gets rid of the newline
 
-
   return input;
 }
 
@@ -44,6 +43,7 @@ void print_command_not_found(char ** args) {
     i++;
   }
   printf("\n");
+  return;
 }
 
 int semi_exec(char ** args) {
@@ -64,9 +64,14 @@ int semi_exec(char ** args) {
       
 
       exit = execute_args(args1);
+      if (exit == 0){
+        // exit(0);
+        return 0;
+      }
       // just like in terminal, say command not found for just that one
       if (exit == -1){
         print_command_not_found(args1);
+        return 0;
       }
       start = i + 1;
     }
@@ -80,12 +85,18 @@ int semi_exec(char ** args) {
     // current problem- if it says exit before last command, it doesn't work
     if (exit == -1) {
       print_command_not_found(args1);
+      return 0;
+    }
+    if (exit == 0) {
+      return 0;
     }
   }
-    return exit;
+  
+  return exit;
 }
 
 int execute_args(char **args) {
+  // printf("is it here, %s\n", args[0]);
   // count the number of args for later
   int arg_count = 0;
 
@@ -105,7 +116,9 @@ int execute_args(char **args) {
 
   // exit
   if (!strcmp(args[0], "exit")) {
+    // printf("here!\n");
     exit(0); // does this just exit wherever?
+    printf("after exit 0\n");
     return 0;
   }
   // cd
