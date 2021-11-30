@@ -15,7 +15,8 @@
 #define ARG_NUM 10
 #define ARG_SIZE 500
 
-char ** parse_args(char *line);
+char ** parse_args(char *line, int session);
+void add_to_history(char *line, int session);
 char * read_args();
 void print_command_not_found(char ** args);
 int semi_exec(char ** args);

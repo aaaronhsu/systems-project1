@@ -2,15 +2,28 @@
 
 // ISSUE: strsep only separates by spaces so there have to be spaces around each semicolon
 // ALSO: doesn't work when you add an access space at the end
-char ** parse_args(char *line) {
+char ** parse_args(char *line, int session) {
+  // first, add the argument to a file for up arrow
+  add_to_history(line, session);
   char **args = calloc(ARG_NUM, sizeof(char *)); 
   args[0] = line; 
   int i;
   for (i = 1; i < ARG_NUM; i++) {
-    // SEE ISSUE ABOVE- add some if statement here that checks for semis
     if (strsep(&line, " ") != NULL) args[i] = line;
   }
   return args;
+}
+
+void add_to_history(char *line, int session) {
+  int file;
+  if (session == 0) {
+    remove("history.txt");
+    file = open("history.txt", O_CREAT | O_WRONLY | O_APPEND, 0644);
+  } else {
+    file = open("history.txt", O_WRONLY | O_APPEND, 0644);
+  }
+  write(file, line, strlen(line));
+  write(file, "\n", sizeof(char));
 }
 
 char * read_args() {
