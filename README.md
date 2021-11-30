@@ -1,4 +1,4 @@
-# Our Shell!!
+# ALizard 🦎
 
 ## Features Implemented
 - Reads one input, parses its text and runs the command.
